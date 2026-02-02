@@ -43,6 +43,25 @@
       <div class='button_area'></div>
     </div>
   </main>
+  
+  <script>
+    //CSVの中からランダムで単語を選ぶ
+    async function getRandomWordFromCSV() {
+      // CSVを読み込む
+      const response = await fetch('data.csv');
+      const text = await response.text();
+    
+      // CSVを行ごとに分割（1行1単語を想定）
+      const words = text
+        .split('\n')
+        .map(word => word.trim())
+        .filter(word => word.length > 0);
+    
+      // ランダムに1つ選ぶ
+      const randomIndex = Math.floor(Math.random() * words.length);
+      return words[randomIndex];
+    }
+  </script>
 
 </body>
 </html>
