@@ -33,6 +33,11 @@
       width: 100%;
       background-color: #fff;
     }
+    
+    #run_button {
+      padding: 1em;
+      width: 100%;
+    }
 
     @media screen and (max-width: 768px) {
     }
@@ -49,11 +54,11 @@
     <div class='main_area'>
       <div class='words_area'>
         <p id='first_word'></p>
-        <p>×</p>
+        <p id='multiply'>×</p>
         <p id='second_word'></p>
       </div>
       <div class='button_area'>
-        <button onclick='showWords()'>シャッフル</button>
+        <button id='run_button' onclick='showWords()'>シャッフル</button>
       </div>
     </div>
   </main>
@@ -76,12 +81,13 @@
       return words[randomIndex];
     }
     async function showWords() {
-      const firstWord  = await getRandomWordFromCSV('first_word.csv');
-      const secondWord = await getRandomWordFromCSV('second_word.csv');
-      const firstWordArea = document.getElementById('first_word');
-      const secondWordArea = document.getElementById('second_word');
-      firstWordArea.textContent = firstWord;
-      secondWordArea.textContent = secondWord;
+      const [firstWord, secondWord] = await Promise.all([
+        getRandomWordFromCSV('first_word.csv'),
+        getRandomWordFromCSV('second_word.csv')
+      ]);
+
+      document.getElementById('first_word').textContent  = firstWord;
+      document.getElementById('second_word').textContent = secondWord;
     }
   </script>
 
