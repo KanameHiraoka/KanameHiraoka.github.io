@@ -39,16 +39,20 @@
 
   <main>
     <div class='main_area'>
-      <div class='words_area'></div>
+      <div class='words_area'>
+        <p id='first_word'></p>
+        <p>×</p>
+        <p id='second_word'></p>
+      </div>
       <div class='button_area'></div>
     </div>
   </main>
   
   <script>
     //CSVの中からランダムで単語を選ぶ
-    async function getRandomWordFromCSV() {
+    async function getRandomWordFromCSV(path) {
       // CSVを読み込む
-      const response = await fetch('data.csv');
+      const response = await fetch(path);
       const text = await response.text();
     
       // CSVを行ごとに分割（1行1単語を想定）
@@ -60,6 +64,14 @@
       // ランダムに1つ選ぶ
       const randomIndex = Math.floor(Math.random() * words.length);
       return words[randomIndex];
+    }
+    async function showWords() {
+      const firstWord  = getRandonWordFromCSV('first_word.csv');
+      const secondWord = getRandonWordFromCSV('second_word.csv');
+      const firstWordArea = document.getElementById('first_word');
+      const secondWordArea = document.getElementById('second_word');
+      firstWordArea.textContent = firstWord;
+      secondWordArea.textContent = secondWord;
     }
   </script>
 
