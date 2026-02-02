@@ -76,8 +76,8 @@
       return words[randomIndex];
     }
     async function showWords() {
-      const firstWord  = getRandomWordFromCSV('first_word.csv');
-      const secondWord = getRandomWordFromCSV('second_word.csv');
+      const firstWord  = await getRandomWordFromCSV('first_word.csv');
+      const secondWord = await getRandomWordFromCSV('second_word.csv');
       const firstWordArea = document.getElementById('first_word');
       const secondWordArea = document.getElementById('second_word');
       firstWordArea.textContent = firstWord;
